@@ -1,18 +1,46 @@
-export default {
-    MAX_ATTACHMENT_SIZE: 5000000,
+const dev = {
+    STRIPE_KEY: "pk_test_51H1VGlI8ctnw0iEDfidr6XLLC7douqWflrycmXHySQzjuAL4DZ4jyHId2tA2PcBH4LCJpa055qOvvf4LaSmdayZS00MIv9Zu6e",
     s3: {
         REGION: "eu-central-1",
-        BUCKET: "com.solenta.aviation.notes-app-upload"
+        BUCKET: "notes-app-2-api-dev-attachmentsbucket-majaorw0t9ix"
     },
     apiGateway: {
         REGION: "eu-central-1",
-        URL: "https://p2seytuxbd.execute-api.eu-central-1.amazonaws.com/prod"
+        URL: "https://api.solenta-online.com/dev"
     },
     cognito: {
         REGION: "eu-central-1",
-        USER_POOL_ID: "eu-central-1_ysmuL47oh",
-        APP_CLIENT_ID: "6e5j2kp51v3rm7o8nlol9isbna",
-        IDENTITY_POOL_ID: "eu-central-1:de9e254e-1be1-4e1e-b5b5-6c02c8434c02"
+        USER_POOL_ID: "eu-central-1_Sw9eyF6f1",
+        APP_CLIENT_ID: "69cjobjn6oftn6ibokk4ntfml",
+        IDENTITY_POOL_ID: "eu-central-1:70af9273-d40f-4bfa-b781-94211c289ee9"
+    }
+};
+
+const prod = {
+    STRIPE_KEY: "YOUR_STRIPE_PROD_PUBLIC_KEY",
+    s3: {
+        REGION: "eu-central-1",
+        BUCKET: "notes-app-2-api-prod-attachmentsbucket-10efyl8h9momi"
     },
-    STRIPE_KEY: "pk_test_51H1VGlI8ctnw0iEDfidr6XLLC7douqWflrycmXHySQzjuAL4DZ4jyHId2tA2PcBH4LCJpa055qOvvf4LaSmdayZS00MIv9Zu6e",
+    apiGateway: {
+        REGION: "eu-central-1",
+        URL: "https://api.solenta-online.com/prod"
+    },
+    cognito: {
+        REGION: "eu-central-1",
+        USER_POOL_ID: "eu-central-1_fQlUKwndt",
+        APP_CLIENT_ID: "1bct6rv1g5otce668enm810n75",
+        IDENTITY_POOL_ID: "eu-central-1:d79babbb-fd57-43da-b674-b4d03d59de88"
+    }
+};
+
+// Default to dev if not set
+const config = process.env.REACT_APP_STAGE === 'prod'
+    ? prod
+    : dev;
+
+export default {
+    // Add common config values here
+    MAX_ATTACHMENT_SIZE: 5000000,
+    ...config
 };
